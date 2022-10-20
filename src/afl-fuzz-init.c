@@ -1963,6 +1963,14 @@ void setup_dirs_fds(afl_state_t *afl) {
 
   }
 
+  /* History directory for any starting & discovered paths. */
+
+  tmp = alloc_printf("%s/history", afl->out_dir);
+  if (access(tmp, X_OK | R_OK | W_OK) && mkdir(tmp, 0700)) {
+    PFATAL("Unable to create '%s'", tmp);
+  }
+  ck_free(tmp);
+
   /* Queue directory for any starting & discovered paths. */
 
   tmp = alloc_printf("%s/queue", afl->out_dir);

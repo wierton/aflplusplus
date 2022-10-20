@@ -514,6 +514,21 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
     close(fd);
     add_to_queue(afl, queue_fn, len, 0);
 
+#if 1
+    if (new_bits == 2) {
+      static unsigned counter = 0;
+      queue_fn =
+          alloc_printf("%s/history/cnt:%06u,id:%06u,%s", afl->out_dir, counter,
+              afl->queued_items, describe_op(afl, new_bits + is_timeout,
+                                   NAME_MAX - strlen("id:000000,")));
+      counter ++;
+      fd = open(queue_fn, O_WRONLY | O_CREAT | O_EXCL, DEFAULT_PERMISSION);
+      if (unlikely(fd < 0)) { PFATAL("Unable to create '%s'", queue_fn); }
+      ck_write(fd, mem, len, queue_fn);
+      close(fd);
+    }
+#endif
+
 #ifdef INTROSPECTION
     if (afl->custom_mutators_count && afl->current_custom_fuzz) {
 

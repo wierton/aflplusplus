@@ -78,7 +78,7 @@
    run. It will end up as .comm, so it shouldn't be too wasteful. */
 
 #if MAP_SIZE <= 65536
-  #define MAP_INITIAL_SIZE 2097152
+  #define MAP_INITIAL_SIZE 8388608
 #else
   #define MAP_INITIAL_SIZE MAP_SIZE
 #endif
