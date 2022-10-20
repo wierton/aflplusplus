@@ -1350,6 +1350,10 @@ void pivot_inputs(afl_state_t *afl) {
     /* Pivot to the new queue entry. */
 
     link_or_copy(q->fname, nfn);
+#if 1
+    nfn = alloc_printf("%s/history/cnt:000000,time:0,orig:%s", afl->out_dir, rsl);
+    link_or_copy(q->fname, nfn);
+#endif
     ck_free(q->fname);
     q->fname = nfn;
 

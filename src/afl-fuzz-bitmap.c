@@ -516,7 +516,7 @@ save_if_interesting(afl_state_t *afl, void *mem, u32 len, u8 fault) {
 
 #if 1
     if (new_bits == 2) {
-      static unsigned counter = 0;
+      static unsigned counter = 1;
       queue_fn =
           alloc_printf("%s/history/cnt:%06u,id:%06u,%s", afl->out_dir, counter,
               afl->queued_items - 1, describe_op(afl, new_bits + is_timeout,
