@@ -1737,6 +1737,10 @@ static void handle_existing_out_dir(afl_state_t *afl) {
   if (delete_files(fn, CASE_PREFIX)) { goto dir_cleanup_failed; }
   ck_free(fn);
 
+  fn = alloc_printf("%s/history", afl->out_dir);
+  if (delete_files(fn, "cnt:")) { goto dir_cleanup_failed; }
+  ck_free(fn);
+
   /* All right, let's do <afl->out_dir>/crashes/id:* and
    * <afl->out_dir>/hangs/id:*. */
 
