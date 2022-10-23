@@ -205,6 +205,7 @@ static void usage(u8 *argv0, int more_help) {
       //"  -B bitmap.txt - mutate a specific test case, use the
       // out/default/fuzz_bitmap file\n"
       "  -C            - crash exploration mode (the peruvian rabbit thing)\n"
+      "  -q            - quiet mode, does not display main menu\n"
       "  -b cpu_id     - bind the fuzzing process to the specified CPU core "
       "(0-...)\n"
       "  -e ext        - file extension for the fuzz test input file (if "
@@ -545,10 +546,13 @@ int main(int argc, char **argv_orig, char **envp) {
   while (
       (opt = getopt(
            argc, argv,
-           "+Ab:B:c:CdDe:E:hi:I:f:F:g:G:l:L:m:M:nNOo:p:RQs:S:t:T:UV:WXx:YZ")) >
+           "+Ab:B:c:CdDe:E:hi:I:f:F:g:G:l:L:m:M:nNOo:p:RQs:S:t:T:UV:WXx:YZq")) >
       0) {
 
     switch (opt) {
+      case 'q':
+        afl->quiet_mode = 1;
+        break;
 
       case 'g':
         afl->min_length = atoi(optarg);

@@ -436,6 +436,7 @@ static void check_term_size(afl_state_t *afl) {
    execve() calls, plus in several other circumstances. */
 
 void show_stats(afl_state_t *afl) {
+  if (afl->quiet_mode) return;
 
   if (afl->pizza_is_served) {
 

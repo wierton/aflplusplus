@@ -439,6 +439,9 @@ typedef struct afl_state {
 
   double w_init, w_end, w_now;
 
+  u8 quiet_mode;
+  u32 num_of_interesting;
+
   s32 g_now;
   s32 g_max;
 
